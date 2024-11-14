@@ -1,0 +1,11 @@
+FROM ubuntu:22.04
+
+RUN apt-get update && \
+    apt-get install -y build-essential && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt
+COPY main.cpp ./
+COPY client ./client/
+RUN g++ -std=c++17 -DBUILD_CLIENT -I. -o /usr/local/bin/client_app main.cpp client/client.cpp
+CMD ["/usr/local/bin/client_app"]

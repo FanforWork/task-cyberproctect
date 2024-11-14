@@ -1,0 +1,11 @@
+[Unit]
+Description=Process Monitor Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/process_monitor
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

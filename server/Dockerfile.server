@@ -1,0 +1,12 @@
+FROM ubuntu:22.04
+
+RUN apt-get update && \
+    apt-get install -y build-essential && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt
+COPY main.cpp ./
+COPY server ./server/
+RUN g++ -std=c++17 -DBUILD_SERVER -I. -o /usr/local/bin/process_monitor main.cpp server/server.cpp
+EXPOSE 8080
+CMD ["/usr/local/bin/process_monitor"]

@@ -1,0 +1,16 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile.server
+    container_name: process_monitor_server
+    pid: "host"
+    privileged: true
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile.client
+    container_name: process_monitor_client
+    depends_on:
+      - server
+    command: /usr/local/bin/client_app
